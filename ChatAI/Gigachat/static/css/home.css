@@ -1,0 +1,203 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container{
+    display: flex;
+    justify-content: baseline;
+    height: 100%;
+    width: 100%;
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+pre{
+    font-family: "Oswald", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1.2em;
+}
+
+.chat_block h1, h3{
+    color: white;
+}
+
+.register h1{
+    color: black;
+}
+
+.chat{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.messages{
+    flex-grow: 1;
+}
+
+.chat_block input, button{
+    justify-content: center;
+    
+}
+
+.chat_block{
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    flex-direction: column;
+    background: rgb(50,122,255);
+    background: linear-gradient(125deg, rgba(50,122,255,1) 51%, rgba(182,91,255,1) 71%, rgba(255,179,91,1) 100%);
+}
+
+.register{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 0.5em;
+    align-items: center;
+}
+
+.register h1{
+    display: block;
+    margin-bottom: 0;
+    margin-top: 3.3em;
+}
+
+.sign_up{
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 5em;
+    font-size: small;
+    color: rgb(61, 61, 61);
+}
+
+.register form{
+    display: flex;
+    flex-direction: column;
+    margin-left: 4em;
+    margin-right: 4em;
+}
+
+.register form label{
+    font-size: medium;
+    color: rgb(26, 26, 26);
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+}
+
+.register p{
+    font-size: small;
+    color: rgb(61, 61, 61);
+    padding: 1em;
+}
+
+.better{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    hr{
+        margin: 0;
+
+    }
+    p{
+        color: rgb(124, 124, 124);
+    }
+}
+
+.register input{
+    display: flex;
+    border-radius: 15px;
+    border: 0;
+    padding: 1.5em;
+    background-color: rgba(0, 0, 0, 0.089);
+}
+
+.register_button{
+    display: flex;
+    border-radius: 25px;
+    border: 0;
+    padding: 1.5em;
+    background-color: rgb(75, 128, 243);
+    color: white;
+}
+
+.input_frame{
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    width: 100%;
+    border: 1px solid rgb(240, 240, 240);
+    padding: 0.5em 0.1em;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    input{
+        background-color: transparent;
+        border: 0;
+        flex-grow: 1;
+        outline: none;
+        padding: 1em;
+    }
+    button{
+        background-color: transparent;
+        border: 0;
+
+    }
+}
+
+.input_frame::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background: rgb(50,122,255);
+    background: linear-gradient(125deg, rgb(74, 137, 255) 60%, rgb(231, 113, 255) 71%, rgb(250, 179, 98) 100%);    background-size: cover;
+    background-size: 200% 200%;
+    background-position: 95%;
+}
+
+.google{
+    border-radius: 25px;
+    padding: 1.5em;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(124, 124, 124);
+    margin-bottom: 1em;
+    display: flex   ;
+    padding-left: 11.9em;
+    padding-right: 11.9em;
+    align-items: center;
+    justify-content: center;
+} 
+
+.yandex{
+    border-radius: 25px;
+    padding: 1.5em;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(124, 124, 124);
+    margin-bottom: 1em;
+    display: flex;
+    padding-left: 11.9em;
+    padding-right: 11.9em;
+    align-items: center;
+    justify-content: center;
+}
+
+.yandex img{
+    margin-right: 0.2em;
+}
+
+.google img{
+    margin-right: 0.2em;
+}
+

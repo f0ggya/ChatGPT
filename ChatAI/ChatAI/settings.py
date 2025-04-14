@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.yandex',
     'django.contrib.staticfiles',
+    'Gigachat',
 ]
 
 MIDDLEWARE = [
