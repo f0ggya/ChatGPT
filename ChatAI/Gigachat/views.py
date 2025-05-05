@@ -1,7 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 import requests, json
+
 
 def home(request):
     return render(request, 'home.html')
@@ -48,3 +51,19 @@ def send_message(request):
     r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
     return HttpResponse(r.content)
 
+
+
+def _login(request):
+    data = request.POST
+    email = data['email']
+    password = data['password']
+    if User.objects.filter(username=email):
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            return HttpResponse('error')
+    else:
+        User.objects.create_user(email, email, password)
+        return HttpResponse('success')

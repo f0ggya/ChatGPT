@@ -2,7 +2,7 @@ const send_button = document.getElementById('send_message')
 const input_message = document.getElementById('input_message')
 const messages = document.querySelector('.messages')
 let list_messages = []
-send_button.addEventListener('click', () => {
+function send_message(){
     let all_messages = messages.querySelectorAll('div')
     all_messages.forEach((message, index) =>{
         if (message.classList.contains('message_from')){
@@ -44,5 +44,15 @@ send_button.addEventListener('click', () => {
             message_frame.appendChild(message_text)
             messages.appendChild(message_frame)
         })
+    }
+    input_message.value = ''
+}
+send_button.addEventListener('click', () => {
+    send_message()
+})
+
+input_message.addEventListener('keydown', (event) =>{
+    if (event.key == 'Enter'){
+        send_message()
     }
 })
