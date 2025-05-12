@@ -4,10 +4,16 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 import requests, json
+from .models import *
 
 
 def home(request):
+    if request.user.is_authenticated:
+        if not Setting.objects.filter(owner=request.user):
+            Setting.objects.create(theme='light_theme', owner=request.user)
+        return render(request, 'base.html')
     return render(request, 'home.html')
+
 
 @require_http_methods(['POST'])
 @csrf_exempt
@@ -66,4 +72,6 @@ def _login(request):
             return HttpResponse('error')
     else:
         User.objects.create_user(email, email, password)
+        user = authenticate(request, username=email, password=password)
+        Setting.objects.create(theme='light_theme', owner=user)
         return HttpResponse('success')
