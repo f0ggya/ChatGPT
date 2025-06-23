@@ -52,7 +52,8 @@ def send_message(request):
         "model": "GigaChat",
         "messages": messages,
         "stream": False,
-        "repetition_penalty": 1
+        "repetition_penalty": 1,
+        "function_call": "auto"
     }
     r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
     return HttpResponse(r.content)

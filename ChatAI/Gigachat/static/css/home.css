@@ -2,6 +2,7 @@ html, body{
     margin: 0;
     padding: 0;
     height: 100%;
+    overflow-y: hidden;
 }
 
 .container{
@@ -53,6 +54,7 @@ pre{
     flex-direction: column;
     background: rgb(50,122,255);
     background: linear-gradient(125deg, rgba(50,122,255,1) 51%, rgba(182,91,255,1) 71%, rgba(255,179,91,1) 100%);
+
 }
 
 .register{
