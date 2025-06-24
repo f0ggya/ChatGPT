@@ -1,11 +1,12 @@
-html, body{
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow-y: hidden;
 }
 
-.container{
+.container {
     display: flex;
     justify-content: baseline;
     height: 100%;
@@ -16,7 +17,7 @@ html, body{
     font-style: normal;
 }
 
-pre{
+pre {
     font-family: "Oswald", sans-serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -24,40 +25,42 @@ pre{
     font-size: 1.2em;
 }
 
-.chat_block h1, h3{
+.chat_block h1,
+h3 {
     color: white;
 }
 
-.register h1{
+.register h1 {
     color: black;
 }
 
-.chat{
+.chat {
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-.messages{
+.messages {
     flex-grow: 1;
 }
 
-.chat_block input, button{
+.chat_block input,
+button {
     justify-content: center;
-    
+
 }
 
-.chat_block{
+.chat_block {
     display: flex;
     width: 100%;
     padding: 1em;
     flex-direction: column;
-    background: rgb(50,122,255);
-    background: linear-gradient(125deg, rgba(50,122,255,1) 51%, rgba(182,91,255,1) 71%, rgba(255,179,91,1) 100%);
+    background: rgb(50, 122, 255);
+    background: linear-gradient(125deg, rgba(50, 122, 255, 1) 51%, rgba(182, 91, 255, 1) 71%, rgba(255, 179, 91, 1) 100%);
 
 }
 
-.register{
+.register {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -65,13 +68,18 @@ pre{
     align-items: center;
 }
 
-.register h1{
+.input_frame:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.register h1 {
     display: block;
     margin-bottom: 0;
     margin-top: 3.3em;
 }
 
-.sign_up{
+.sign_up {
     display: flex;
     margin-top: 1em;
     margin-bottom: 5em;
@@ -79,42 +87,44 @@ pre{
     color: rgb(61, 61, 61);
 }
 
-.register form{
+.register form {
     display: flex;
     flex-direction: column;
     margin-left: 4em;
     margin-right: 4em;
 }
 
-.register form label{
+.register form label {
     font-size: medium;
     color: rgb(26, 26, 26);
     margin-bottom: 0.5em;
     margin-top: 1em;
 }
 
-.register p{
+.register p {
     font-size: small;
     color: rgb(61, 61, 61);
     padding: 1em;
 }
 
-.better{
+.better {
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: center;
-    hr{
+
+    hr {
         margin: 0;
 
     }
-    p{
+
+    p {
         color: rgb(124, 124, 124);
     }
 }
 
-.register input{
+.register input {
     display: flex;
     border-radius: 15px;
     border: 0;
@@ -122,7 +132,12 @@ pre{
     background-color: rgba(0, 0, 0, 0.089);
 }
 
-.register_button{
+.register form input:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.register_button {
     display: flex;
     border-radius: 25px;
     border: 0;
@@ -131,7 +146,12 @@ pre{
     color: white;
 }
 
-.input_frame{
+.register_button:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.input_frame {
     display: flex;
     align-items: center;
     border-radius: 15px;
@@ -141,21 +161,23 @@ pre{
     position: relative;
     z-index: 1;
     overflow: hidden;
-    input{
+
+    input {
         background-color: transparent;
         border: 0;
         flex-grow: 1;
         outline: none;
         padding: 1em;
     }
-    button{
+
+    button {
         background-color: transparent;
         border: 0;
 
     }
 }
 
-.input_frame::after{
+.input_frame::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -163,26 +185,14 @@ pre{
     top: 0;
     left: 0;
     z-index: -1;
-    background: rgb(50,122,255);
-    background: linear-gradient(125deg, rgb(74, 137, 255) 60%, rgb(231, 113, 255) 71%, rgb(250, 179, 98) 100%);    background-size: cover;
+    background: rgb(50, 122, 255);
+    background: linear-gradient(125deg, rgb(74, 137, 255) 60%, rgb(231, 113, 255) 71%, rgb(250, 179, 98) 100%);
+    background-size: cover;
     background-size: 200% 200%;
     background-position: 95%;
 }
 
-.google{
-    border-radius: 25px;
-    padding: 1.5em;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(124, 124, 124);
-    margin-bottom: 1em;
-    display: flex   ;
-    padding-left: 11.9em;
-    padding-right: 11.9em;
-    align-items: center;
-    justify-content: center;
-} 
-
-.yandex{
+.google {
     border-radius: 25px;
     padding: 1.5em;
     background-color: rgb(255, 255, 255);
@@ -195,11 +205,58 @@ pre{
     justify-content: center;
 }
 
-.yandex img{
+.yandex {
+    border-radius: 25px;
+    padding: 1.5em;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(124, 124, 124);
+    margin-bottom: 1em;
+    display: flex;
+    padding-left: 11.9em;
+    padding-right: 11.9em;
+    align-items: center;
+    justify-content: center;
+}
+
+.yandex img {
     margin-right: 0.2em;
 }
 
-.google img{
+.google img {
     margin-right: 0.2em;
 }
 
+.google:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.yandex:hover {
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+
+.messages {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(11.5px);
+    -webkit-backdrop-filter: blur(11.5px);
+    margin-bottom: 1.5em;
+}
+
+.message_from {
+    font-family: "Oswald", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.301);
+}
+
+.message_fromAI{
+    font-family: "Oswald", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: rgba(0, 0, 0, 0.664);
+}
