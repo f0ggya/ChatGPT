@@ -38,7 +38,6 @@ function send_message() {
             .then(data => {
                 let answer = data.choices[0].message.content
                 let message_frame = document.createElement('div')
-
                 let message_text = document.createElement('h4')
                 let copy_svg = document.createElement('img')
                 copy_svg.src = '/static/media/copy.svg'

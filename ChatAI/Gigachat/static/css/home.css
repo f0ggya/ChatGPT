@@ -42,6 +42,7 @@ h3 {
 
 .messages {
     flex-grow: 1;
+    padding: 1em;
 }
 
 .chat_block input,

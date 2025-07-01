@@ -55,8 +55,18 @@ def send_message(request):
         "repetition_penalty": 1,
         "function_call": "auto"
     }
-    r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
-    return HttpResponse(r.content)
+
+    if request.user.is_authenticated:
+        if Chat.objects.filter(name=messages[0]['content']):
+            pass
+        else:
+            Chat.objects.create(name=messages[0]['content'], owner=request.user)
+
+        r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
+        return HttpResponse(r.content)
+    else:
+        r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
+        return HttpResponse(r.content)
 
 
 

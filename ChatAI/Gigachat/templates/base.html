@@ -1,11 +1,62 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
 </head>
+
 <body>
-    
+    <div class="container">
+        <div class="left_panel">
+            <h2>CHAT A.I+</h2>
+            <div class="search">
+
+            </div>
+            <button id="new_chat">
+
+            </button>
+            <h5>Your conversation</h5>
+            <h5 id="clear_all">Clear all</h5>
+            <div class="chats">
+
+            </div>
+            <div class="settings">
+                <h5>Settings</h5>
+            </div>
+            <div class="account">
+                <div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <div class="right_panel">
+            <div class="none">
+                <h2>CHAT A.I+</h2>
+                <h1>Good day! How may i assist you togay?</h1>
+            </div>
+            <div class="input">
+                <input type="text" id="input">
+                <button class="input_button">
+                    отправить
+                </button>
+            </div>
+            <div class="upgrade">
+                <button id="upgrade">
+                    
+                </button>
+            </div>  
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/base.js' %}"></script>
 </body>
+
 </html>
