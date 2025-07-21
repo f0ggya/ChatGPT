@@ -81,6 +81,9 @@ def send_message(request):
             Chat.objects.create(name=messages[0]['content'], owner=request.user)
 
         r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
+        data = json.loads(r.content)
+        text = data['choices'][0]["message"]['content']
+        Message.objects.create(text=text, from_who='assistant', chat=chat)
         return HttpResponse(r.content)
     else:
         r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
