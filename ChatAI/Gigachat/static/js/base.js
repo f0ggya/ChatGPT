@@ -1,3 +1,4 @@
+let chat_id = 0
 function send_message() {
     $.ajax({
         url: '/send_message',
@@ -5,7 +6,8 @@ function send_message() {
         contentType: 'application/json',
         data: JSON.stringify({
             prompt: $('#input').val(),
-            messages: []
+            status: 'auth',
+            chat_id: chat_id
         }),
         success: function (result) {
             const data = JSON.parse(result)
@@ -32,4 +34,28 @@ $('#input').on('keydown', function(event){
         send_message()
         $(this).val('')
     }
+})
+
+const chat_block = document.getElementById('chat')
+
+$('.chat_btn').click(function(){
+    chat_id = parseInt($(this).attr('chat_id'))
+    $.ajax({
+        url: '/open_chat',
+        type: 'post',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'chat_id': chat_id
+        }),
+        success: function (result){
+            const data = JSON.parse(result)
+            chat_block.innerHTML = ''
+            for (index in data){
+                message_frame = document.createElement('div')
+                console.log(data[index].content)
+                message_frame.textContent = data[index].content
+                chat_block.appendChild(message_frame)
+            }
+        }
+    })
 })

@@ -7,7 +7,7 @@ class Chat(models.Model):
 
 class Message(models.Model):
     text = models.TextField('text')
-    from_who = models.IntegerField('from_who')
+    from_who = models.TextField('from_who')
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
 
 class Setting(models.Model):

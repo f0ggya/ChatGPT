@@ -9,9 +9,10 @@ from .models import *
 
 def home(request):
     if request.user.is_authenticated:
+        chats = Chat.objects.filter(owner=request.user)
         if not Setting.objects.filter(owner=request.user):
             Setting.objects.create(theme='light_theme', owner=request.user)
-        return render(request, 'base.html')
+        return render(request, 'base.html', {'chats': chats})
     return render(request, 'home.html')
 
 
@@ -33,11 +34,7 @@ def send_message(request):
     }
 
     response = requests.request("POST", url, headers=headers, data=payload, verify=False)
-    messages = data['messages']
-    messages.append({
-        'role': 'user',
-        'content': prompt
-    })
+    
     access_token = json.loads(response.text)['access_token']
     
     url = 'https://gigachat.devices.sberbank.ru/api/v1/chat/completions'
@@ -48,6 +45,27 @@ def send_message(request):
     'Authorization': f'Bearer {access_token}',
     'Content-Type': 'application/json'
     }
+    if data['status'] == 'anon':
+        messages = data['messages']
+        messages.append({
+            'role': 'user',
+            'content': prompt
+        })
+    else:
+        chat = Chat.objects.get(id=data['chat_id'])
+        messages_ = Message.objects.filter(chat=chat)
+        messages = []
+        for message in messages_:
+            messages.append({
+                'role': message.from_who,
+                'content': message.text
+            })
+        messages.append({
+            'role': 'user',
+            'content': prompt
+        })
+        Message.objects.create(text=prompt, from_who ='user', chat=chat)
+
     payload ={
         "model": "GigaChat",
         "messages": messages,
@@ -57,7 +75,7 @@ def send_message(request):
     }
 
     if request.user.is_authenticated:
-        if Chat.objects.filter(name=messages[0]['content']):
+        if Chat.objects.filter(id=data['chat_id']):
             pass
         else:
             Chat.objects.create(name=messages[0]['content'], owner=request.user)
@@ -86,3 +104,16 @@ def _login(request):
         user = authenticate(request, username=email, password=password)
         Setting.objects.create(theme='light_theme', owner=user)
         return HttpResponse('success')
+
+@csrf_exempt    
+def open_chat(request):
+    data = json.loads(request.body)
+    chat = Chat.objects.get(id=data['chat_id'])
+    messages_ = Message.objects.filter(chat=chat)
+    messages = []
+    for message in messages_:
+        messages.append({
+            'role': message.from_who,
+            'content': message.text
+        })
+    return HttpResponse(json.dumps(messages))

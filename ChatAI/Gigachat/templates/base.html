@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <title>home</title>
 </head>
 
@@ -21,7 +22,9 @@
             <h5>Your conversation</h5>
             <h5 id="clear_all">Clear all</h5>
             <div class="chats">
-
+                {% for chat in chats %}
+                <button class="chat_btn" chat_id="{{ chat.id }}">{{ chat.name }}</button>
+                {% endfor %}
             </div>
             <div class="settings">
                 <h5>Settings</h5>
@@ -36,13 +39,14 @@
             </div>
         </div>
         <div class="right_panel">
-            <div class="none">
+            <div class="none" id="chat">
                 <h2>CHAT A.I+</h2>
                 <h1>Good day! How may i assist you togay?</h1>
             </div>
+            
             <div class="input">
                 <input type="text" id="input">
-                <button class="input_button">
+                <button class="input_button" id="in">
                     отправить
                 </button>
             </div>

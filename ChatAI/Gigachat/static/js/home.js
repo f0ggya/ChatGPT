@@ -30,7 +30,7 @@ function send_message() {
         messages.appendChild(message_frame)
         fetch('/send_message', {
             method: 'POST',
-            body: JSON.stringify({ prompt: prompt, messages: list_messages })
+            body: JSON.stringify({ prompt: prompt, messages: list_messages, status: 'anon'})
         })
             .then(response => {
                 return response.json()
