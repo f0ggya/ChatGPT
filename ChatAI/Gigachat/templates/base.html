@@ -20,7 +20,7 @@
 
             </button>
             <h5>Your conversation</h5>
-            <h5 id="clear_all">Clear all</h5>
+            <a id="clear_all" href="/clear_all">Clear all</a>
             <div class="chats">
                 {% for chat in chats %}
                 <button class="chat_btn" chat_id="{{ chat.id }}">{{ chat.name }}</button>

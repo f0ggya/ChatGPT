@@ -52,8 +52,13 @@ def send_message(request):
             'content': prompt
         })
     else:
-        chat = Chat.objects.get(id=data['chat_id'])
-        messages_ = Message.objects.filter(chat=chat)
+        if Chat.objects.filter(id=data['chat_id']):
+            chat = Chat.objects.get(id=data['chat_id'])
+            messages_ = Message.objects.filter(chat=chat)
+        else:
+            chat = Chat.objects.create(name=prompt, owner=request.user)
+            messages_ = []
+        
         messages = []
         for message in messages_:
             messages.append({
@@ -64,6 +69,7 @@ def send_message(request):
             'role': 'user',
             'content': prompt
         })
+
         Message.objects.create(text=prompt, from_who ='user', chat=chat)
 
     payload ={
@@ -75,16 +81,21 @@ def send_message(request):
     }
 
     if request.user.is_authenticated:
-        if Chat.objects.filter(id=data['chat_id']):
-            pass
-        else:
-            Chat.objects.create(name=messages[0]['content'], owner=request.user)
-
         r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
         data = json.loads(r.content)
         text = data['choices'][0]["message"]['content']
         Message.objects.create(text=text, from_who='assistant', chat=chat)
-        return HttpResponse(r.content)
+        messages_ = Message.objects.filter(chat=chat)
+        messages = {
+            'chat_id': chat.id,
+            'messages': []
+        }
+        for message in messages_:
+            messages['messages'].append({
+                'role': message.from_who,
+                'content': message.text
+            })
+        return HttpResponse(json.dumps(messages))
     else:
         r = s.post(url, headers=headers, data=json.dumps(payload), verify=False)
         return HttpResponse(r.content)
@@ -120,3 +131,11 @@ def open_chat(request):
             'content': message.text
         })
     return HttpResponse(json.dumps(messages))
+
+def clear_all(request):
+    user = request.user
+    chats = Chat.objects.filter(owner=user)
+    for chat in chats:
+        messages = Message.objects.filter(chat=chat).delete()
+        chat.delete()
+    return redirect('/')

@@ -1,5 +1,6 @@
 let chat_id = 0
 function send_message() {
+    $('#input').val('')
     $.ajax({
         url: '/send_message',
         type: 'post',
@@ -11,34 +12,32 @@ function send_message() {
         }),
         success: function (result) {
             const data = JSON.parse(result)
-            let answer = data.choices[0].message.content
-            let message_frame = document.createElement('div')
-            let message_text = document.createElement('h4')
-            let copy_svg = document.createElement('img')
-            copy_svg.src = '/static/media/copy.svg'
-            copy_svg.onclick = function () {
-                navigator.clipboard.writeText(message_text.textContent)
+            console.log(data)
+            chat_block.innerHTML = ''
+            chat_id = data['chat_id']
+            let messages = data['messages']
+            for (index in messages) {
+                message_frame = document.createElement('div')
+                console.log(messages[index].content)
+                message_frame.textContent = messages[index].content
+                chat_block.appendChild(message_frame)
             }
-            message_text.textContent = answer
-            message_frame.appendChild(message_text)
-            message_frame.appendChild(copy_svg)
-            message_text.classList.add('text_from')
-            document.body.appendChild(message_frame)
         }
     })
+
 }
 $('.input_button').click(send_message)
 
-$('#input').on('keydown', function(event){
+$('#input').on('keydown', function (event) {
     if (event.key == 'Enter') {
         send_message()
-        $(this).val('')
     }
+    
 })
 
 const chat_block = document.getElementById('chat')
 
-$('.chat_btn').click(function(){
+$('.chat_btn').click(function () {
     chat_id = parseInt($(this).attr('chat_id'))
     $.ajax({
         url: '/open_chat',
@@ -47,10 +46,10 @@ $('.chat_btn').click(function(){
         data: JSON.stringify({
             'chat_id': chat_id
         }),
-        success: function (result){
+        success: function (result) {
             const data = JSON.parse(result)
             chat_block.innerHTML = ''
-            for (index in data){
+            for (index in data) {
                 message_frame = document.createElement('div')
                 console.log(data[index].content)
                 message_frame.textContent = data[index].content
